@@ -134,9 +134,9 @@ public class BaseTeleOp extends Base {
             climbStop();
         }*/
 
-        if(gamepad1.right_bumper){
+        if(gamepad1.dpad_up){
             moveClimber(1);
-        }else if(gamepad1.left_bumper){
+        }else if(gamepad1.dpad_down){
             moveClimber(-1);
         }else{
             moveClimber(0);
