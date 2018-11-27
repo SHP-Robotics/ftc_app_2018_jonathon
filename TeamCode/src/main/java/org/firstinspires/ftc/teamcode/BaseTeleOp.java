@@ -17,6 +17,7 @@ public class BaseTeleOp extends Base {
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     @Override
@@ -29,10 +30,6 @@ public class BaseTeleOp extends Base {
     public void loop(){
         super.loop();
 
-        /*climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        climber.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
-
         left = this.gamepad1.left_stick_y;
         right = -this.gamepad1.right_stick_y;
 
@@ -40,6 +37,14 @@ public class BaseTeleOp extends Base {
         rightBack.setPower(right);
         leftFront.setPower(left);
         rightFront.setPower(right);
+
+        if(gamepad1.dpad_up) {
+            moveClimber(1);
+        } else if (gamepad1.dpad_down) {
+            moveClimber(-1);
+        } else {
+            stopClimber();
+        }
 
         if (gamepad1.left_stick_y > 0 && gamepad1.left_stick_y < 0.5) {
 
@@ -133,14 +138,6 @@ public class BaseTeleOp extends Base {
         } else {
             climbStop();
         }*/
-
-        if(gamepad1.dpad_up){
-            moveClimber(1);
-        }else if(gamepad1.dpad_down){
-            moveClimber(-1);
-        }else{
-            moveClimber(0);
-        }
 
     }
 }

@@ -108,8 +108,10 @@ public class Base extends OpMode {
             rightBack.setPower(0);
             rightFront.setPower(0);
             return true;
+
         }
         return false;
+
     }
 
     /**
@@ -235,10 +237,12 @@ public class Base extends OpMode {
 
     //end
 
-    public void moveClimber(double power) {
-        double speed = Range.clip(power, -1, 1);
+    public void moveClimber(double power){
+        climber.setPower(power);
+    }
 
-        climber.setPower(-speed);
+    public void stopClimber(){
+        climber.setPower(0);
     }
 
     public void stop_intake_move(){
