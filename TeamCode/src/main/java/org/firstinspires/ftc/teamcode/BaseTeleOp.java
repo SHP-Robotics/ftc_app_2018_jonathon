@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
 public class BaseTeleOp extends Base {
 
-    public static int pressed = 0;
-
     @Override
     public void init(){
 
@@ -45,38 +43,38 @@ public class BaseTeleOp extends Base {
 
         if (gamepad1.left_stick_y > 0 && gamepad1.left_stick_y < 0.5) {
 
-            leftBack.setPower(slowPower);
-            leftFront.setPower(slowPower);
+            leftBack.setPower(0.3);
+            leftFront.setPower(0.3);
 
         }
         else if (gamepad1.left_stick_y > 0.5 && gamepad1.left_stick_y < 0.9) {
 
-            leftBack.setPower(normalPower);
-            leftFront.setPower(normalPower);
+            leftBack.setPower(0.5);
+            leftFront.setPower(0.5);
 
         }
         else if (gamepad1.left_stick_y > 0.9) {
 
-            leftBack.setPower(normalPower);
-            leftFront.setPower(normalPower);
+            leftBack.setPower(0.6);
+            leftFront.setPower(0.6);
 
         }
         else if (gamepad1.right_stick_y > 0 && gamepad1.right_stick_y < 0.5) {
 
-            rightBack.setPower(-slowPower);
-            rightFront.setPower(-slowPower);
+            rightBack.setPower(-0.3);
+            rightFront.setPower(-0.3);
 
         }
         else if (gamepad1.right_stick_y > 0.5 && gamepad1.right_stick_y < 0.9) {
 
-            rightBack.setPower(-normalPower);
-            rightFront.setPower(-normalPower);
+            rightBack.setPower(-0.5);
+            rightFront.setPower(-0.5);
 
         }
         else if (gamepad1.right_stick_y > 0.9) {
 
-            rightBack.setPower(-fastPower);
-            rightFront.setPower(-fastPower);
+            rightBack.setPower(-0.6);
+            rightFront.setPower(-0.6);
 
         }
 
@@ -134,37 +132,15 @@ public class BaseTeleOp extends Base {
             max = false;
         } else {
             climbStop();
-        }
+        }*/
 
-*/
-        /*if(gamepad1.dpad_up){
-
+        if(gamepad1.right_bumper){
             moveClimber(1);
-
-        }
-        else if(gamepad1.dpad_down){
-
+        }else if(gamepad1.left_bumper){
             moveClimber(-1);
-
-        }
-        else{
-
-            moveClimber(0);
-
-        }*/
-
-        /*if (gamepad1.right_bumper) {
-            servoTest.setPosition(1.0);
-        } else if (gamepad1.left_bumper) {
-            servoTest.setPosition(0.3);
-        }*/
-
-        if(gamepad1.left_bumper){
-            climber.setPower(1);
-        }else if(gamepad1.right_bumper){
-            climber.setPower(-1);
         }else{
-            climber.setPower(0);
+            moveClimber(0);
         }
+
     }
 }

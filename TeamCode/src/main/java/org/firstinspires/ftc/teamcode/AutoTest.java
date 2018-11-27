@@ -66,7 +66,7 @@ public class AutoTest extends Base {
                 if(Math.abs(get_climb_enc())> 4000){
                     moveClimber(0);
                     detector.enable();
-                    reset_climb_encoders();
+                    stage++;
                 }
                 else{
                     moveClimber(1);
@@ -93,6 +93,8 @@ public class AutoTest extends Base {
                     timer.reset();
                     stage++;
                 }
+
+                break;
 
             default:
 
