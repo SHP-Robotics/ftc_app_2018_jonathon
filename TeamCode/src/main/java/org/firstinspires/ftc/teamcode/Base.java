@@ -48,8 +48,8 @@ public class Base extends OpMode {
     @Override
     public void start(){
         timer.reset();
-        reset_climb_encoders();
         reset_drive_encoders();
+        reset_climb_encoders();
     }
 
     @Override
@@ -72,11 +72,15 @@ public class Base extends OpMode {
     }
 
     public void reset_climb_encoders(){
+
         climber.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
     public void reset_intake_encoders(){
         intakeMove.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeMove.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     //drive in autonomous
