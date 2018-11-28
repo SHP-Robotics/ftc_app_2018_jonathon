@@ -238,7 +238,7 @@ public class Base extends OpMode {
     //end
 
     public void moveClimber(double power){
-        climber.setPower(power);
+        climber.setPower(-power);
     }
 
     public void stopClimber(){
