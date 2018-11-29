@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.util.Range;
 //created by jonathon for 13981
 
 public class Base extends OpMode {
-    
-    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climber;
+
+    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climber, tyler;
     public Servo servoTest;
     public ElapsedTime timer = new ElapsedTime();
 

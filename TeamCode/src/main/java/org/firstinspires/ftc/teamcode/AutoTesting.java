@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
 
-public class AutoTest extends Base {
+public class AutoTesting extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
@@ -47,7 +47,7 @@ public class AutoTest extends Base {
 
         servoTest.setPosition(up_position);
 
-        //detector.enable(); use when needed only
+        detector.enable();
     }
 
     @Override
@@ -60,42 +60,87 @@ public class AutoTest extends Base {
 
     @Override
     public void loop() {
+
         super.loop();
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
 
         switch (stage) {
             case 0:
-                if(Math.abs(get_climb_enc())> 4000){
+                if(Math.abs(get_climb_enc()) > 4000){
                     moveClimber(0);
+                    reset_climb_encoders();
                     stage++;
                 }
                 else{
-                    moveClimber(1);
+                    climber.setPower(1);
                 }
 
                 break;
 
             case 1:
-
-                if(auto_drive(0.6, 5)){
+                if(auto_drive(-0.8, 2)){
                     reset_drive_encoders();
-                    timer.reset();
                     stage++;
                 }
 
                 break;
 
             case 2:
-
-                if(timer.seconds() > 2){
-                    servoTest.setPosition(drop_position);
-                }
-                else{
-                    timer.reset();
+                if(detector.getAligned()){
+                    stage++;
+                }else{
                     stage++;
                 }
 
+                break;
+
+            case 3:
+                if(detector.getXPosition() > 280){
+                    if(auto_turn(0.4, 10)){
+                        reset_drive_encoders();
+                        stage+=2;
+                    }
+                }
+                else{
+                   stage++;
+                }
+
+                break;
+
+            case 4:
+                if(detector.getXPosition() < 280) {
+                    if (auto_turn(-0.4, 10)) {
+                        reset_drive_encoders();
+                        stage++;
+                    }
+                }
+                else{
+                    stage++;
+                }
+
+                break;
+
+            case 5:
+                if(auto_drive(0.8, 5)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 6:
+                if(auto_turn(-0.5, 5)){ //left
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 7:
+
+                servoTest.setPosition(drop_position);
+                stage++;
                 break;
 
             default:
@@ -105,8 +150,10 @@ public class AutoTest extends Base {
     }
 
     @Override
-    public void stop() {
+    public void stop(){
         detector.disable();
     }
+
 }
+
 
