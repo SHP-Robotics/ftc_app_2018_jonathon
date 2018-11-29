@@ -13,11 +13,11 @@ public class BaseTeleOp extends Base {
 
         super.init();
 
-        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/ 
     }
 
     @Override
@@ -30,6 +30,18 @@ public class BaseTeleOp extends Base {
     public void loop(){
         super.loop();
 
+        //climber
+
+        if(gamepad1.dpad_up) {
+            climb(1);
+        } else if (gamepad1.dpad_down) {
+            climb(-1);
+        } else {
+            climb(0);
+        }
+
+        //drive train
+
         left = this.gamepad1.left_stick_y;
         right = -this.gamepad1.right_stick_y;
 
@@ -38,13 +50,7 @@ public class BaseTeleOp extends Base {
         leftFront.setPower(left);
         rightFront.setPower(right);
 
-        if(gamepad1.dpad_up) {
-            moveClimber(1);
-        } else if (gamepad1.dpad_down) {
-            moveClimber(-1);
-        } else {
-            stopClimber();
-        }
+        //tank drive sensitivity
 
         if (gamepad1.left_stick_y > 0 && gamepad1.left_stick_y < 0.5) {
 
@@ -83,6 +89,8 @@ public class BaseTeleOp extends Base {
 
         }
 
+        //intakeMove sensitivity
+
         if (gamepad1.right_trigger > 0.7 && gamepad1.right_trigger < 0.9) {
 
             intakeMove.setPower(0.8);
@@ -114,30 +122,8 @@ public class BaseTeleOp extends Base {
 
         }
         else {
-            stop_intake_move();
+            intakeMove.setPower(0);
         }
-/*
-        if (gamepad1.dpad_up && !gamepad1.dpad_down && top == false && bottom == true && max == false) {
-            moveClimber(-4800);
-            top = true;
-            bottom = true;
-            max = false;
-        } else if (gamepad1.dpad_down && !gamepad1.dpad_up && top == true && bottom == true && max == false) {
-            moveClimber(4800);
-            top = false;
-            bottom = true;
-            max = false;
-        } else if (gamepad1.dpad_right && top == true && max == false) {
-            moveClimber(-1600);
-            top = false;
-            max = true;
-        } else if (gamepad1.dpad_left && top == false && max == true) {
-            moveClimber(1600);
-            top = true;
-            max = false;
-        } else {
-            climbStop();
-        }*/
 
     }
 }

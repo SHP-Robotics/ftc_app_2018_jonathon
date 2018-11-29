@@ -34,7 +34,7 @@ public class AutoCrater extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
 
-        servoTest.setPosition(up_position);
+        marker_servo.setPosition(up_position);
 
         //detector.enable(); use when needed only
     }
@@ -54,22 +54,8 @@ public class AutoCrater extends Base {
         switch(stage){
 
             case 0:
-                if(Math.abs(get_climb_enc()) > 4800){
-                    moveClimber(0);
-                    detector.enable();
-                    reset_climb_encoders();
-                }
-                else{
-                    moveClimber(1);
-                }
 
                 break;
-
-            case 1:
-                if(auto_drive(0.6, 10)){
-
-                }
-
 
             default:
 

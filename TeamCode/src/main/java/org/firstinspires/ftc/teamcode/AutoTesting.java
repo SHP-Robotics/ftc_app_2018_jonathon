@@ -45,7 +45,7 @@ public class AutoTesting extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
 
-        servoTest.setPosition(up_position);
+        marker_servo.setPosition(up_position);
 
         detector.enable();
     }
@@ -68,12 +68,11 @@ public class AutoTesting extends Base {
         switch (stage) {
             case 0:
                 if(Math.abs(get_climb_enc()) > 4000){
-                    moveClimber(0);
-                    reset_climb_encoders();
+                    climb(0);
                     stage++;
                 }
                 else{
-                    climber.setPower(1);
+                    climb(1);
                 }
 
                 break;
@@ -97,7 +96,7 @@ public class AutoTesting extends Base {
 
             case 3:
                 if(detector.getXPosition() > 280){
-                    if(auto_turn(0.4, 10)){
+                    if(auto_turn(0.4, -15)){ //right
                         reset_drive_encoders();
                         stage+=2;
                     }
@@ -110,7 +109,7 @@ public class AutoTesting extends Base {
 
             case 4:
                 if(detector.getXPosition() < 280) {
-                    if (auto_turn(-0.4, 10)) {
+                    if (auto_turn(-0.4, 15)) { //left
                         reset_drive_encoders();
                         stage++;
                     }
@@ -139,7 +138,7 @@ public class AutoTesting extends Base {
 
             case 7:
 
-                servoTest.setPosition(drop_position);
+                marker_servo.setPosition(drop_position);
                 stage++;
                 break;
 

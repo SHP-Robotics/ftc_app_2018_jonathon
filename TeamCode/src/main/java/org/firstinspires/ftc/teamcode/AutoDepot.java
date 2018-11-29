@@ -34,7 +34,7 @@ public class AutoDepot extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
 
-        servoTest.setPosition(up_position);
+        marker_servo.setPosition(up_position);
 
         //detector.enable(); use when needed only
     }

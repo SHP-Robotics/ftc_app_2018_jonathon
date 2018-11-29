@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 
 public class Base extends OpMode {
 
-    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climber, tyler;
-    public Servo servoTest;
+    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climber;
+    public Servo marker_servo;
     public ElapsedTime timer = new ElapsedTime();
 
     double left = 0;
@@ -42,7 +42,9 @@ public class Base extends OpMode {
 
         climber = hardwareMap.get(DcMotor.class, "climber");
 
-        servoTest = hardwareMap.get(Servo.class, "servoTest");
+        marker_servo = hardwareMap.get(Servo.class, "marker_servo");
+
+        marker_servo.setPosition(up_position);
     }
 
     @Override
@@ -54,7 +56,13 @@ public class Base extends OpMode {
 
     @Override
     public void loop() {
+        telemetry.addData("Timer: ", timer.seconds());
 
+        telemetry.addData("leftBack encoder: ", get_leftBack_motor_enc());
+        telemetry.addData("rightBack encoder: ", get_rightBack_motor_enc());
+        telemetry.addData("leftFront encoder: ", get_leftFront_motor_enc());
+        telemetry.addData("rightFront encoder: ", get_rightFront_motor_enc());
+        telemetry.addData("climber encoder: ", get_climb_enc());
     }
 
     //reset encoders
@@ -78,9 +86,54 @@ public class Base extends OpMode {
 
     }
 
-    public void reset_intake_encoders(){
-        intakeMove.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intakeMove.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    public void climb(double power) {
+
+        double speed = Range.clip(power, -1, 1);
+        climber.setPower(-speed);
+
+    }
+
+    //get leftBack encoders
+
+    public int get_leftBack_motor_enc(){
+        if(leftBack.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return leftBack.getCurrentPosition();
+    }
+
+    //get leftFront encoders
+
+    public int get_leftFront_motor_enc(){
+        if(leftFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return leftFront.getCurrentPosition();
+    }
+
+    //get rightBack encoders
+
+    public int get_rightBack_motor_enc(){
+        if(rightBack.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return rightBack.getCurrentPosition();
+    }
+
+    //get rightFront encoders
+
+    public int get_rightFront_motor_enc(){
+        if(rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return rightFront.getCurrentPosition();
+    }
+
+    public int get_climb_enc(){
+        if(climber.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return climber.getCurrentPosition();
     }
 
     //drive in autonomous
@@ -149,50 +202,7 @@ public class Base extends OpMode {
         return false;
     }
 
-    //get leftBack encoders
-
-    public int get_leftBack_motor_enc(){
-        if(leftBack.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return leftBack.getCurrentPosition();
-    }
-
-    //get leftFront encoders
-
-    public int get_leftFront_motor_enc(){
-        if(leftFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return leftFront.getCurrentPosition();
-    }
-
-    //get rightBack encoders
-
-    public int get_rightBack_motor_enc(){
-        if(rightBack.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return rightBack.getCurrentPosition();
-    }
-
-    //get rightFront encoders
-
-    public int get_rightFront_motor_enc(){
-        if(rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return rightFront.getCurrentPosition();
-    }
-
-    public int get_climb_enc(){
-        if(climber.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return climber.getCurrentPosition();
-    }
-
-    //reference methods
+    /*
 
     public void driveForward(double leftPower, double rightPower) {
         leftBack.setPower(-leftPower);
@@ -239,21 +249,5 @@ public class Base extends OpMode {
         rightFront.setPower(0.5);
     }
 
-    //end
-
-    public void moveClimber(double power){
-        climber.setPower(-power);
-    }
-
-    public void stopClimber(){
-        climber.setPower(0);
-    }
-
-    public void stop_intake_move(){
-        intakeMove.setPower(0);
-    }
-
-    public int seconds(int seconds) {
-        return seconds * 1000;
-    }
+    */
 }

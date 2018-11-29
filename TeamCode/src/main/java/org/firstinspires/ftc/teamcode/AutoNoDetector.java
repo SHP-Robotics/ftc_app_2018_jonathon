@@ -27,11 +27,11 @@ public class AutoNoDetector extends Base {
 
             case 0:
                 if(Math.abs(get_climb_enc())>4000){
-                    moveClimber(0);
+                    climb(0);
                     stage++;
                 }
                 else{
-                    moveClimber(1);
+                    climb(1);
                 }
 
                 break;
