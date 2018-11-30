@@ -158,8 +158,8 @@ public class Base extends OpMode {
     public boolean auto_drive(double power, double inches){
         double target_enc = ConstantVariables.K_PPIN_DRIVE * inches;
         telemetry.addData("Target: ", target_enc);
-        double left_speed = power;
-        double right_speed = -power;
+        double left_speed = -power;
+        double right_speed = power;
 
         left_speed = Range.clip(left_speed, -1, 1);
         right_speed = Range.clip(right_speed, -1, 1);

@@ -37,7 +37,13 @@ public class AutoNoDetector extends Base {
                 break;
 
             case 1:
-                if(auto_drive(0.8, 5)){
+                if(auto_drive(0.8, 10)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+            case 2:
+                if(auto_turn(0.4, 35)){
                     reset_drive_encoders();
                     stage++;
                 }

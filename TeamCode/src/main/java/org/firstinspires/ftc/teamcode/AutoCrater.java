@@ -100,7 +100,7 @@ public class AutoCrater extends Base {
             case 4:
 
                 if(detector.getXPosition() > 280){
-                    if(auto_turn(0.4, -32.17)){
+                    if(auto_turn(0.4, 32.17)){
                         reset_drive_encoders();
                         stage += 2;
                     }
@@ -114,7 +114,7 @@ public class AutoCrater extends Base {
             case 5:
 
                 if(detector.getXPosition() < 280){
-                    if(auto_turn(0.4, 32.17)){
+                    if(auto_turn(0.4, -32.17)){
                         reset_drive_encoders();
                         stage++;
                     }
@@ -143,7 +143,7 @@ public class AutoCrater extends Base {
 
             case 8:
 
-                if(auto_turn(0.4, 90)){
+                if(auto_turn(0.4, -90)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -161,7 +161,7 @@ public class AutoCrater extends Base {
 
             case 10:
 
-                if(auto_turn(0.4, 45)){
+                if(auto_turn(0.4, -45)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -179,7 +179,7 @@ public class AutoCrater extends Base {
 
             case 12:
 
-                if(auto_turn(0.4, -90)){
+                if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage++;
                 }
