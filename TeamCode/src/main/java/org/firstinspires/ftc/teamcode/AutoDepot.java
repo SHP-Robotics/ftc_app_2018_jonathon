@@ -36,7 +36,7 @@ public class AutoDepot extends Base {
 
         marker_servo.setPosition(up_position);
 
-        //detector.enable(); use when needed only
+        //detector.enable();
     }
 
     @Override

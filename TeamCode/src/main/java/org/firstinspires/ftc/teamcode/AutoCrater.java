@@ -36,7 +36,7 @@ public class AutoCrater extends Base {
 
         marker_servo.setPosition(up_position);
 
-        //detector.enable(); use when needed only
+        //detector.enable();
     }
 
     @Override
@@ -55,6 +55,141 @@ public class AutoCrater extends Base {
 
             case 0:
 
+                if(Math.abs(get_climb_enc())> 4000){
+                    climb(0);
+                    timer.reset();
+                    stage++;
+                }else{
+                    climb(1);
+                }
+
+                break;
+
+            case 1:
+
+                if(timer.seconds() > 2){
+                    timer.reset();
+                    stage++;
+                }else{
+                    stop_all();
+                }
+
+                break;
+
+            case 2:
+
+                if(auto_drive(0.3, -2)){
+                    reset_drive_encoders();
+                    detector.enable();
+                    stage++;
+                }
+
+                break;
+
+            case 3:
+
+                if(detector.getAligned()){
+                    stage +=3;
+                }
+                else{
+                    stage++;
+                }
+
+                break;
+
+            case 4:
+
+                if(detector.getXPosition() > 280){
+                    if(auto_turn(0.4, -32.17)){
+                        reset_drive_encoders();
+                        stage += 2;
+                    }
+                }
+                else{
+                    stage++;
+                }
+
+                break;
+
+            case 5:
+
+                if(detector.getXPosition() < 280){
+                    if(auto_turn(0.4, 32.17)){
+                        reset_drive_encoders();
+                        stage++;
+                    }
+                }
+                else{
+                    stage++;
+                }
+
+                break;
+
+            case 6:
+
+                if(auto_drive(0.7, 35)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 7:
+
+                if(auto_drive(0.4, -5)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+            case 8:
+
+                if(auto_turn(0.4, 90)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 9:
+
+                if(auto_drive(0.8, 48)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 10:
+
+                if(auto_turn(0.4, 45)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 11:
+
+                if(auto_drive(0.6, 50)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 12:
+
+                if(auto_turn(0.4, -90)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 13:
+
+                marker_servo.setPosition(drop_position);
+                stage++;
                 break;
 
             default:

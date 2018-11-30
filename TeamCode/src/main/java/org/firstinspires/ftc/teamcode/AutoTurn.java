@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
 
-public class AutoTesting extends Base {
+public class AutoTurn extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
@@ -66,26 +66,8 @@ public class AutoTesting extends Base {
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
 
         switch (stage) {
+
             case 0:
-                if(Math.abs(get_climb_enc()) > 4000){
-                    climb(0);
-                    stage++;
-                }
-                else{
-                    climb(1);
-                }
-
-                break;
-
-            case 1:
-                if(auto_drive(-0.8, 2)){
-                    reset_drive_encoders();
-                    stage++;
-                }
-
-                break;
-
-            case 2:
                 if(detector.getAligned()){
                     stage++;
                 }else{
@@ -94,7 +76,7 @@ public class AutoTesting extends Base {
 
                 break;
 
-            case 3:
+            case 1:
                 if(detector.getXPosition() > 280){
                     if(auto_turn(0.4, -15)){ //right
                         reset_drive_encoders();
@@ -107,7 +89,7 @@ public class AutoTesting extends Base {
 
                 break;
 
-            case 4:
+            case 2:
                 if(detector.getXPosition() < 280) {
                     if (auto_turn(-0.4, 15)) { //left
                         reset_drive_encoders();
@@ -120,7 +102,7 @@ public class AutoTesting extends Base {
 
                 break;
 
-            case 5:
+            case 3:
                 if(auto_drive(0.8, 5)){
                     reset_drive_encoders();
                     stage++;
@@ -128,7 +110,7 @@ public class AutoTesting extends Base {
 
                 break;
 
-            case 6:
+            case 4:
                 if(auto_turn(-0.5, 5)){ //left
                     reset_drive_encoders();
                     stage++;
@@ -136,7 +118,7 @@ public class AutoTesting extends Base {
 
                 break;
 
-            case 7:
+            case 5:
 
                 marker_servo.setPosition(drop_position);
                 stage++;

@@ -17,7 +17,7 @@ public class BaseTeleOp extends Base {
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/ 
+        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
     }
 
     @Override
@@ -50,8 +50,10 @@ public class BaseTeleOp extends Base {
         leftFront.setPower(left);
         rightFront.setPower(right);
 
-        //tank drive sensitivity
 
+
+        //tank drive sensitivity
+/*
         if (gamepad1.left_stick_y > 0 && gamepad1.left_stick_y < 0.5) {
 
             leftBack.setPower(0.3);
@@ -88,8 +90,7 @@ public class BaseTeleOp extends Base {
             rightFront.setPower(-0.6);
 
         }
-
-        //intakeMove sensitivity
+*/
 
         if (gamepad1.right_trigger > 0.7 && gamepad1.right_trigger < 0.9) {
 
@@ -126,4 +127,5 @@ public class BaseTeleOp extends Base {
         }
 
     }
+
 }

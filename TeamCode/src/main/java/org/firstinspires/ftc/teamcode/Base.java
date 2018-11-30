@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.Range;
 
 public class Base extends OpMode {
 
-    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climber;
+    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climbMotor;
     public Servo marker_servo;
     public ElapsedTime timer = new ElapsedTime();
 
@@ -40,7 +40,7 @@ public class Base extends OpMode {
 
         intakeMove = hardwareMap.get(DcMotor.class, "intakeMove");
 
-        climber = hardwareMap.get(DcMotor.class, "climber");
+        climbMotor = hardwareMap.get(DcMotor.class, "climbMotor");
 
         marker_servo = hardwareMap.get(Servo.class, "marker_servo");
 
@@ -52,6 +52,14 @@ public class Base extends OpMode {
         timer.reset();
         reset_drive_encoders();
         reset_climb_encoders();
+    }
+
+    public void stop_all(){
+        leftBack.setPower(0);
+        rightBack.setPower(0);
+        leftFront.setPower(0);
+        rightFront.setPower(0);
+        climbMotor.setPower(0);
     }
 
     @Override
@@ -81,16 +89,26 @@ public class Base extends OpMode {
 
     public void reset_climb_encoders(){
 
-        climber.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        climbMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        climbMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
+
 
     public void climb(double power) {
 
         double speed = Range.clip(power, -1, 1);
-        climber.setPower(-speed);
+        climbMotor.setPower(-speed);
 
+    }
+
+    //climber
+
+    public int get_climb_enc(){
+        if(climbMotor.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            climbMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return climbMotor.getCurrentPosition();
     }
 
     //get leftBack encoders
@@ -127,13 +145,6 @@ public class Base extends OpMode {
             rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
         return rightFront.getCurrentPosition();
-    }
-
-    public int get_climb_enc(){
-        if(climber.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
-            climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        return climber.getCurrentPosition();
     }
 
     //drive in autonomous
