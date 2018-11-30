@@ -1,7 +1,3 @@
-##Hello Coders
-
-Hi, welcome to the FTC app 2018 git repo for team 13981. Most of this code was written by Andrew Zhu, who I think created all of the intuitive boolean methods that control how the robot drives during autonomous, as well as the ConstantVariables file which is always very useful. Please create another branch if you want to upload any files and suggest changes to the master branch. 
-
 ## Welcome!
 This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
 
