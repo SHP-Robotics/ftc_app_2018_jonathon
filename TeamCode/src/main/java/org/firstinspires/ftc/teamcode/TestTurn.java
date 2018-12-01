@@ -1,4 +1,4 @@
-//use to test encoders, etc.
+//testing OpenCV
 
 package org.firstinspires.ftc.teamcode;
 
