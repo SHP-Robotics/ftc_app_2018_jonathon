@@ -36,7 +36,7 @@ public class AutoCrater extends Base {
 
         marker_servo.setPosition(up_position);
 
-        //detector.enable();
+        detector.enable();
     }
 
     @Override
@@ -89,9 +89,11 @@ public class AutoCrater extends Base {
             case 4:
 
                 if(detector.getXPosition() > 280){
-                    if(auto_turn(0.4, 32.17)){
+                    if(detector.getAligned()){
+                        stage+=2;
+                    }
+                    else if(auto_turn(0.4, 5)){
                         reset_drive_encoders();
-                        stage += 2;
                     }
                 }
                 else{
@@ -103,9 +105,11 @@ public class AutoCrater extends Base {
             case 5:
 
                 if(detector.getXPosition() < 280){
-                    if(auto_turn(0.4, -32.17)){
-                        reset_drive_encoders();
+                    if(detector.getAligned()){
                         stage++;
+                    }
+                    else if(auto_turn(0.4, -5)){
+                        reset_drive_encoders();
                     }
                 }
                 else{

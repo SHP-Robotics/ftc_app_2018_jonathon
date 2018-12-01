@@ -69,7 +69,7 @@ public class AutoTurn extends Base {
 
             case 0:
                 if(detector.getAligned()){
-                    stage++;
+                    stage+=3;
                 }else{
                     stage++;
                 }
@@ -80,9 +80,9 @@ public class AutoTurn extends Base {
                 if(detector.getXPosition() > 280){
                     if(detector.getAligned()){
                         stage+=2;
-                    } else if(auto_turn(0.4, 5)){ //right
+                    }
+                    else if(auto_turn(0.4, 5)){ //right
                         reset_drive_encoders();
-                        //stage+=2;
                     }
                 }
                 else{
@@ -93,9 +93,11 @@ public class AutoTurn extends Base {
 
             case 2:
                 if(detector.getXPosition() < 280) {
-                    if (auto_turn(-0.4, -32.17)) { //left
-                        reset_drive_encoders();
+                    if(detector.getAligned()){
                         stage++;
+                    }
+                    else if (auto_turn(-0.4, -5)) { //left
+                        reset_drive_encoders();
                     }
                 }
                 else{
@@ -105,7 +107,7 @@ public class AutoTurn extends Base {
                 break;
 
             case 3:
-                if(auto_drive(0.8, 10)){
+                if(auto_drive(0.8, 35)){
                     reset_drive_encoders();
                     stage++;
                 }
