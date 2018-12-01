@@ -37,17 +37,25 @@ public class AutoNoDetector extends Base {
                 break;
 
             case 1:
-                if(auto_drive(0.8, 10)){
+                if(auto_drive(0.8, 57)){
                     reset_drive_encoders();
                     stage++;
                 }
+
+                break;
 
             case 2:
-                if(auto_turn(0.4, 35)){
+                if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage++;
                 }
 
+                break;
+
+            case 3:
+
+                marker_servo.setPosition(drop_position);
+                stage++;
                 break;
 
             default:
