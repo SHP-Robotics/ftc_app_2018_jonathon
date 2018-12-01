@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
 
-public class AutoTurn extends Base {
+public class TestTurn extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
@@ -94,27 +94,54 @@ public class AutoTurn extends Base {
             case 2:
                 if(detector.getXPosition() < 280) {
                     if(detector.getAligned()){
-                        stage++;
+                        stage+=2;
                     }
                     else if (auto_turn(-0.4, -5)) { //left
                         reset_drive_encoders();
                     }
                 }
                 else{
-                    stage++;
+                    stage+=2;
                 }
 
                 break;
 
-            case 3:
-                if(auto_drive(0.8, 35)){
+            /*case 3:
+
+                if(Math.abs(get_intake_enc()) > 100){
+                    intake(0);
                     reset_drive_encoders();
                     stage++;
                 }
+                else{
+                    intake(-0.1); //down
+                }
+
+                break;*/
+
+            case 4:
+
+                if(auto_drive(0.8, 35)){
+                    reset_drive_encoders();
+                    stage+=2;
+                }
 
                 break;
 
-            case 4:
+            /*case 5:
+
+                if(Math.abs(get_intake_enc()) > 100){
+                    intake(0);
+                    reset_drive_encoders();
+                    stage++;
+                }
+                else{
+                    intake(0.1); //up
+                }
+
+                break;*/
+
+            case 6:
                 if(auto_turn(-0.5, 90)){ //right
                     reset_drive_encoders();
                     stage++;
@@ -122,7 +149,7 @@ public class AutoTurn extends Base {
 
                 break;
 
-            case 5:
+            case 7:
 
                 marker_servo.setPosition(drop_position);
                 stage++;

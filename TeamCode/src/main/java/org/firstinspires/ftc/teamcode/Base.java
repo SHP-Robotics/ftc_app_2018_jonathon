@@ -102,6 +102,22 @@ public class Base extends OpMode {
 
     }
 
+    public void intake(double power) {
+
+        double speed = Range.clip(power, -1, 1);
+        intakeMove.setPower(-speed);
+
+    }
+
+    //intake
+
+    public int get_intake_enc(){
+        if(intakeMove.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            intakeMove.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return intakeMove.getCurrentPosition();
+    }
+
     //climber
 
     public int get_climb_enc(){
