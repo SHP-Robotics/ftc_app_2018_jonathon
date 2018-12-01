@@ -38,7 +38,7 @@ public class AutoCrater extends Base {
 
         marker_servo.setPosition(up_position);
 
-        detector.enable();
+        //detector.enable();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 2:
+            case 1:
 
                 if(auto_drive(0.3, -2)){
                     reset_drive_encoders();
@@ -77,7 +77,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 3:
+            case 2:
 
                 if(detector.getAligned()){
                     direction = 0;
@@ -89,7 +89,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 4:
+            case 3:
 
                 if(detector.getXPosition() > 280){
                     if(detector.getAligned()){
@@ -106,7 +106,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 5:
+            case 4:
 
                 if(detector.getXPosition() < 280){
                     if(detector.getAligned()){
@@ -123,7 +123,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 6:
+            case 5:
 
                 if(auto_drive(0.7, 35)){
                     reset_drive_encoders();
@@ -132,28 +132,30 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 7:
+            case 6:
 
                 if(direction == 0){
                     stage++;
                 }
                 else if(direction == 1){
-                    stage +=3;
+                    stage +=5;
                 }
                 else if(direction == 2){
-                    stage += 6;
+                    stage += 8;
                 }
 
                 break;
 
-            case 8:
+            case 7:
 
                 if(auto_drive(0.4, -5)){
                     reset_drive_encoders();
                     stage++;
                 }
 
-            case 9:
+                break;
+
+            case 8:
 
                 if(auto_turn(0.4, -90)){
                     reset_drive_encoders();
@@ -162,7 +164,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 10:
+            case 9:
 
                 if(auto_drive(0.8, 48)){
                     reset_drive_encoders();
@@ -171,7 +173,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 11:
+            case 10:
 
                 if(auto_turn(0.4, -45)){
                     reset_drive_encoders();
@@ -182,7 +184,7 @@ public class AutoCrater extends Base {
 
             //right - 95 - 35d - 80
 
-            case 12:
+            case 11:
 
                 if(auto_turn(0.4, -95)){
                     reset_drive_encoders();
@@ -191,7 +193,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 13:
+            case 12:
 
                 if(auto_drive(0.8, 35)){
                     reset_drive_encoders();
@@ -200,7 +202,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 14:
+            case 13:
 
                 if(auto_turn(0.4, -80)){
                     reset_drive_encoders();
@@ -211,7 +213,7 @@ public class AutoCrater extends Base {
 
             //left - 20d - 20 - 90d
 
-            case 15:
+            case 14:
 
                 if(auto_turn(0.4, -20)){
                     reset_drive_encoders();
@@ -220,7 +222,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 16:
+            case 15:
 
                 if(auto_drive(0.8, 20)){
                     reset_drive_encoders();
@@ -229,7 +231,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 17:
+            case 16:
 
                 if(auto_turn(0.4, -90)){
                     reset_drive_encoders();
@@ -240,7 +242,7 @@ public class AutoCrater extends Base {
 
             //end
 
-            case 18:
+            case 17:
 
                 if(auto_drive(0.6, 50)){
                     reset_drive_encoders();
@@ -249,7 +251,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 19:
+            case 18:
 
                 if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
@@ -258,7 +260,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 20:
+            case 19:
 
                 marker_servo.setPosition(drop_position);
                 stage++;
