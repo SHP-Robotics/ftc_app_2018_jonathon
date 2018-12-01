@@ -65,17 +65,6 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 1:
-
-                if(timer.seconds() > 2){
-                    timer.reset();
-                    stage++;
-                }else{
-                    stop_all();
-                }
-
-                break;
-
             case 2:
 
                 if(auto_drive(0.3, -2)){

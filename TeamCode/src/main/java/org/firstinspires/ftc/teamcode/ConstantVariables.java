@@ -22,7 +22,7 @@ public class ConstantVariables {
     public static final double K_WEDGE_SERVO_UP = 0.2;
     public static final double K_WEDGE_SERVO_DOWN = 1;
 
-    public static final int K_PPR_DRIVE = 280;
+    public static final int K_PPR_DRIVE = 1120; //280
     public static final double K_DRIVE_WHEEL_DIA = 4;
     public static final double K_DRIVE_DIA = 16.5;
 
