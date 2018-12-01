@@ -13,11 +13,6 @@ public class BaseTeleOp extends Base {
 
         super.init();
 
-        /*leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        climber.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
     }
 
     @Override
