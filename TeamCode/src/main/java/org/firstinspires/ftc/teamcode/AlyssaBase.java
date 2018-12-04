@@ -27,5 +27,14 @@ public class AlyssaBase extends OpMode {
     public void stop(){
 
     }
+
+    public void move(double power){
+        if(gamepad1.dpad_left) {
+            alyssaMotor.setPower(power);
+        }
+        else if(gamepad1.dpad_right){
+            alyssaMotor.setPower(-power);
+        }
+    }
 }
 
