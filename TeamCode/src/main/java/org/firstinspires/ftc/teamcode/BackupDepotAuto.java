@@ -1,3 +1,5 @@
+//testing depot
+
 package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
@@ -86,7 +88,7 @@ public class BackupDepotAuto extends Base {
                         direction = 1;
                         stage+=2;
                     }
-                    else if(auto_turn(0.4, 2)){
+                    else if(auto_turn(0.4, 5)){ //positive power = right
                         reset_drive_encoders();
                     }
                 }
@@ -103,7 +105,7 @@ public class BackupDepotAuto extends Base {
                         direction = 2;
                         stage++;
                     }
-                    else if(auto_turn(0.4, -2)){
+                    else if(auto_turn(-0.4, 5)){ //negative power = left
                         reset_drive_encoders();
                     }
                 }
@@ -158,7 +160,7 @@ public class BackupDepotAuto extends Base {
 
             case 8:
 
-                if(auto_turn(0.4, -25)){
+                if(auto_turn(-0.4, 25)){ //negative power = left
                     reset_drive_encoders();
                     stage++;
                 }
@@ -185,7 +187,7 @@ public class BackupDepotAuto extends Base {
 
             case 11:
 
-                if(auto_drive(0.8, -10)){
+                if(auto_drive(-0.8, 10)){ //negative power = back
                     reset_drive_encoders();
                     stage += 5;
                 }
