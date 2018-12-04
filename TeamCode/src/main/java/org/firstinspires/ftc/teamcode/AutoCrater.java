@@ -40,7 +40,7 @@ public class AutoCrater extends Base {
 
         marker_servo.setPosition(up_position);
 
-        detector.enable();
+        //detector.enable();
     }
 
     @Override
@@ -60,6 +60,7 @@ public class AutoCrater extends Base {
             case 0:
 
                 if(Math.abs(get_climb_enc())> 4000){
+                    detector.enable();
                     climb(0);
                     timer.reset();
                     stage++;

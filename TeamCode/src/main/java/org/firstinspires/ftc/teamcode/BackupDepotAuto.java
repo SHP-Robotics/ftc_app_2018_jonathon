@@ -27,7 +27,7 @@ public class BackupDepotAuto extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
         marker_servo.setPosition(up_position);
-        detector.enable();
+        //detector.enable();
     }
 
     @Override
@@ -45,6 +45,7 @@ public class BackupDepotAuto extends Base {
 
             case 0:
                 if(Math.abs(get_climb_enc()) > 4000){
+                    detector.enable();
                     climb(0);
                     stage++;
                 }
