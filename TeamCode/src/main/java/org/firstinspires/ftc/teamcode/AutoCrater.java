@@ -12,7 +12,7 @@ public class AutoCrater extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
-    public static int direction;
+    private int direction = 0;
 
     @Override
     public void init(){
@@ -59,22 +59,13 @@ public class AutoCrater extends Base {
 
             case 0:
 
-                if(Math.abs(get_climb_enc())> 4000){
+                if(Math.abs(get_climb_enc())> 4250){
                     detector.enable();
                     climb(0);
                     timer.reset();
-                    stage++;
+                    stage += 2;
                 }else{
                     climb(1);
-                }
-
-                break;
-
-            case 1:
-
-                if(auto_drive(-0.3, 2)){ //back
-                    reset_drive_encoders();
-                    stage++;
                 }
 
                 break;
@@ -82,7 +73,6 @@ public class AutoCrater extends Base {
             case 2:
 
                 if(detector.getAligned()){
-                    direction = 0;
                     stage +=3;
                 }
                 else{
@@ -94,11 +84,12 @@ public class AutoCrater extends Base {
             case 3:
 
                 if(detector.getXPosition() > 280){
+
+                    direction = 1;
                     if(detector.getAligned()){
-                        direction = 1;
                         stage+=2;
                     }
-                    else if(auto_turn(0.4, 5)){
+                    else if(auto_turn(0.4, 2)){
                         reset_drive_encoders();
                     }
                 }
@@ -111,11 +102,12 @@ public class AutoCrater extends Base {
             case 4:
 
                 if(detector.getXPosition() < 280){
+
+                    direction = 2;
                     if(detector.getAligned()){
-                        direction = 2;
                         stage++;
                     }
-                    else if(auto_turn(-0.4, 5)){
+                    else if(auto_turn(-0.4, 2)){
                         reset_drive_encoders();
                     }
                 }
@@ -127,7 +119,7 @@ public class AutoCrater extends Base {
 
             case 5:
 
-                if(auto_drive(0.7, 35)){
+                if(auto_drive(0.7, 20)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -144,6 +136,9 @@ public class AutoCrater extends Base {
                 }
                 else if(direction == 2){
                     stage += 8;
+                }
+                else{
+                    stage++;
                 }
 
                 break;

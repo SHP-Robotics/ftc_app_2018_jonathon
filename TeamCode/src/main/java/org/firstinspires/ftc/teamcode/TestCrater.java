@@ -8,7 +8,7 @@ import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
-public class AutoNoDetectorCrater extends Base {
+public class TestCrater extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
@@ -59,7 +59,7 @@ public class AutoNoDetectorCrater extends Base {
 
             case 0:
 
-                if(Math.abs(get_climb_enc())> 4000){
+                if(Math.abs(get_climb_enc())> 4200){
                     climb(0);
                     timer.reset();
                     stage++;

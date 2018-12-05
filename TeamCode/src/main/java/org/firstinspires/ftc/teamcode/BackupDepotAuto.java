@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class BackupDepotAuto extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
-    public int direction;
+
+    private int direction = 0;
 
     @Override
     public void init(){
@@ -44,7 +45,7 @@ public class BackupDepotAuto extends Base {
         switch(stage){
 
             case 0:
-                if(Math.abs(get_climb_enc()) > 4000){
+                if(Math.abs(get_climb_enc()) > 4250){
                     detector.enable();
                     climb(0);
                     stage++;
@@ -55,7 +56,6 @@ public class BackupDepotAuto extends Base {
                 break;
             case 1:
                 if(detector.getAligned()){
-                    direction = 0;
                     stage +=3;
                 }
                 else{
@@ -64,11 +64,12 @@ public class BackupDepotAuto extends Base {
                 break;
             case 2:
                 if(detector.getXPosition() > 280){
+                    direction = 1;
                     if(detector.getAligned()){
-                        direction = 1;
+
                         stage+=2;
                     }
-                    else if(auto_turn(0.4, 2)){
+                    else if(auto_turn(0.4, 5)){
                         reset_drive_encoders();
                     }
                 }
@@ -78,11 +79,12 @@ public class BackupDepotAuto extends Base {
                 break;
             case 3:
                 if(detector.getXPosition() < 280){
+                    direction = 2;
                     if(detector.getAligned()){
-                        direction = 2;
+
                         stage++;
                     }
-                    else if(auto_turn(-0.4, 2)){ //left
+                    else if(auto_turn(-0.4, 5)){ //left
                         reset_drive_encoders();
                     }
                 }
@@ -90,12 +92,15 @@ public class BackupDepotAuto extends Base {
                     stage++;
                 }
                 break;
+
             case 4:
+
                 if(auto_drive(0.7, 35)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
+
             case 5:
                 if(direction == 0){
                     stage++;
@@ -106,7 +111,11 @@ public class BackupDepotAuto extends Base {
                 else if(direction == 2){
                     stage += 7;
                 }
+                else{
+                    stage++;
+                }
                 break;
+
             case 6:
                 if(auto_drive(0.4, 10)){
                     reset_drive_encoders();
@@ -119,7 +128,9 @@ public class BackupDepotAuto extends Base {
                     stage += 9;
                 }
                 break;
+
             //right - 35d - 10 - 90d - 10
+
             case 8:
                 if(auto_turn(-0.4, 25)){ //left
                     reset_drive_encoders();
@@ -144,9 +155,11 @@ public class BackupDepotAuto extends Base {
                     stage += 5;
                 }
                 break;
+
             //left - 25d - 10 - 90d - 10
+
             case 12:
-                if(auto_turn(0.4, 25)){
+                if(auto_turn(0.4, 45)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -169,6 +182,7 @@ public class BackupDepotAuto extends Base {
                     stage++; //to end
                 }
                 break;
+
             //end
             case 16:
                 marker_servo.setPosition(drop_position);
@@ -181,7 +195,7 @@ public class BackupDepotAuto extends Base {
                 }
                 break;
             case 18:
-                if(auto_turn(0.4, 45)){
+                if(auto_turn(0.4, 55)){
                     reset_drive_encoders();
                     stage++;
                 }

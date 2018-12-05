@@ -28,9 +28,9 @@ public class BaseTeleOp extends Base {
         //climber
 
         if(gamepad1.dpad_up) {
-            climb(1);
+            climb(0.5);
         } else if (gamepad1.dpad_down) {
-            climb(-1);
+            climb(-0.5);
         } else {
             climb(0);
         }
