@@ -28,7 +28,7 @@ public class BackupDepotAuto extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
         marker_servo.setPosition(up_position);
-        //detector.enable();
+        detector.enable();
     }
 
     @Override
@@ -46,7 +46,6 @@ public class BackupDepotAuto extends Base {
 
             case 0:
                 if(Math.abs(get_climb_enc()) > 4250){
-                    detector.enable();
                     climb(0);
                     stage++;
                 }
@@ -54,6 +53,7 @@ public class BackupDepotAuto extends Base {
                     climb(1);
                 }
                 break;
+
             case 1:
                 if(detector.getAligned()){
                     stage +=3;
@@ -62,35 +62,37 @@ public class BackupDepotAuto extends Base {
                     stage++;
                 }
                 break;
+
             case 2:
                 if(detector.getXPosition() > 280){
                     direction = 1;
                     if(detector.getAligned()){
-
                         stage+=2;
                     }
-                    else if(auto_turn(0.4, 5)){
+                    else if(auto_turn(0.4, 5)){ //right
                         reset_drive_encoders();
                     }
                 }
                 else{
-                    stage++;
+                    stage ++;
                 }
+
                 break;
+
             case 3:
-                if(detector.getXPosition() < 280){
+                if(detector.getXPosition() < 280) {
                     direction = 2;
                     if(detector.getAligned()){
-
-                        stage++;
+                        stage+=2;
                     }
-                    else if(auto_turn(-0.4, 5)){ //left
+                    else if (auto_turn(-0.4, -5)) { //left
                         reset_drive_encoders();
                     }
                 }
                 else{
                     stage++;
                 }
+
                 break;
 
             case 4:
@@ -159,25 +161,25 @@ public class BackupDepotAuto extends Base {
             //left - 25d - 10 - 90d - 10
 
             case 12:
-                if(auto_turn(0.4, 45)){
+                if(auto_drive(0.5, 5)){ //forward 5
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
             case 13:
-                if(auto_drive(0.8, 10)){
+                if(auto_turn(0.4, 90)){ //turn right 90
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
             case 14:
-                if(auto_turn(0.4, 90)){
+                if(auto_drive(0.4, 5)){ //forward 5
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
             case 15:
-                if(auto_drive(0.8, 10)){
+                if(auto_drive(0.8, 0.01)){
                     reset_drive_encoders();
                     stage++; //to end
                 }
@@ -188,20 +190,23 @@ public class BackupDepotAuto extends Base {
                 marker_servo.setPosition(drop_position);
                 stage++;
                 break;
+
             case 17:
                 if(auto_drive(0.8, 10)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
+
             case 18:
-                if(auto_turn(0.4, 55)){
+                if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
+
             case 19:
-                if(auto_drive(1, 100)){
+                if(auto_drive(1, 85)){
                     reset_drive_encoders();
                     stage++;
                 }
