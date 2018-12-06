@@ -63,7 +63,7 @@ public class BackupAutoCrater extends Base {
 
                     climb(0);
                     timer.reset();
-                    stage += 2;
+                    stage ++;
 
                 }else{
                     climb(1);
@@ -114,7 +114,7 @@ public class BackupAutoCrater extends Base {
 
                 if(auto_turn(-0.4, 45)){ //left
                     reset_drive_encoders();
-                    stage+=7;//to end
+                    stage++;//to end
                 }
 
                 break;
@@ -123,7 +123,7 @@ public class BackupAutoCrater extends Base {
 
             case 6:
 
-                if(auto_drive(0.6, 50)){
+                if(auto_drive(0.6, 40)){
                     reset_drive_encoders();
                     stage++;
                 }
