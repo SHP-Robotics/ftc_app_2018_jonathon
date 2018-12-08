@@ -55,6 +55,16 @@ public class AutoDepot extends Base {
                 break;
 
             case 1:
+
+                if(auto_drive(0.1, 1)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 2:
+
                 if(detector.getAligned()){
                     stage +=3;
                 }
@@ -63,7 +73,8 @@ public class AutoDepot extends Base {
                 }
                 break;
 
-            case 2:
+            case 3:
+
                 if(detector.getXPosition() > 280){
                     direction = 1;
                     if(detector.getAligned()){
@@ -79,12 +90,14 @@ public class AutoDepot extends Base {
 
                 break;
 
-            case 3:
+            case 4:
+
                 if(detector.getXPosition() < 280) {
                     direction = 2;
                     if(detector.getAligned()){
                         stage+=2;
                     }
+
                     else if (auto_turn(-0.4, -5)) { //left
                         reset_drive_encoders();
                     }
@@ -95,7 +108,7 @@ public class AutoDepot extends Base {
 
                 break;
 
-            case 4:
+            case 5:
 
                 if(auto_drive(0.7, 35)){
                     reset_drive_encoders();
@@ -103,7 +116,7 @@ public class AutoDepot extends Base {
                 }
                 break;
 
-            case 5:
+            case 6:
                 if(direction == 0){
                     stage++;
                 }
@@ -118,13 +131,15 @@ public class AutoDepot extends Base {
                 }
                 break;
 
-            case 6:
-                if(auto_drive(0.4, 10)){
+            case 7:
+
+                if(auto_drive(0.4, 7)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 7:
+
+            case 8:
                 if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage += 9;
@@ -133,25 +148,28 @@ public class AutoDepot extends Base {
 
             //right - 25l - 10 - 90r - 10b
 
-            case 8:
+            case 9:
                 if(auto_turn(-0.4, 25)){ //left
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 9:
+
+            case 10:
                 if(auto_drive(0.8, 10)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 10:
-                if(auto_turn(0.4, 90)){ //right
+
+            case 11:
+                if(auto_turn(0.4, 95)){ //right
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 11:
+
+            case 12:
                 if(auto_drive(-0.8, 10)){
                     reset_drive_encoders();
                     stage += 5;
@@ -160,25 +178,25 @@ public class AutoDepot extends Base {
 
             //left - 5f - 90r - 5f
 
-            case 12:
+            case 13:
                 if(auto_drive(0.5, 5)){ //forward 5
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 13:
+            case 14:
                 if(auto_turn(0.4, 90)){ //turn right 90
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 14:
+            case 15:
                 if(auto_drive(0.4, 5)){ //forward 5
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
-            case 15:
+            case 16:
                 if(auto_drive(0.8, 0.01)){
                     reset_drive_encoders();
                     stage++; //to end
@@ -186,26 +204,26 @@ public class AutoDepot extends Base {
                 break;
 
             //end
-            case 16:
+            case 17:
                 marker_servo.setPosition(drop_position);
                 stage++;
                 break;
 
-            case 17:
+            case 18:
                 if(auto_drive(0.8, 10)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
 
-            case 18:
+            case 19:
                 if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
 
-            case 19:
+            case 20:
                 if(auto_drive(1, 85)){
                     reset_drive_encoders();
                     stage++;

@@ -26,7 +26,7 @@ public class Base extends OpMode {
     public double fastSpeed = 1.0;
 
     public double drop_position = 1.0;
-    public double up_position = 0.3;
+    public double up_position = 0.15;
 
     @Override
 

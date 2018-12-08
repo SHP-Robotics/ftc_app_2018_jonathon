@@ -103,7 +103,7 @@ public class AutoCrater extends Base {
 
             case 4:
 
-                if(auto_drive(0.8, 48)){
+                if(auto_drive(0.8, 40)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -112,7 +112,7 @@ public class AutoCrater extends Base {
 
             case 5:
 
-                if(auto_turn(-0.4, 45)){ //left
+                if(auto_turn(-0.4, 70)){ //left
                     reset_drive_encoders();
                     stage++;//to end
                 }
