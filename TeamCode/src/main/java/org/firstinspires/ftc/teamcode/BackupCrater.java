@@ -1,4 +1,4 @@
-//pre-test Auto Crater
+//final test
 
 package org.firstinspires.ftc.teamcode;
 
@@ -6,15 +6,13 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-@Disabled
 @Autonomous
-public class TestCrater extends Base {
+public class BackupCrater extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
-    public static int direction;
+    private int direction = 0;
 
     @Override
     public void init(){
@@ -61,24 +59,29 @@ public class TestCrater extends Base {
 
             case 0:
 
-                if(Math.abs(get_climb_enc())> 4200){
+                if(Math.abs(get_climb_enc())> 4250){
+
                     climb(0);
                     timer.reset();
-                    stage++;
+                    stage ++;
+
                 }else{
                     climb(1);
                 }
 
                 break;
+                //drive sequence setup
 
             case 1:
 
-                if(auto_drive(-0.3, 2)){ //back
+                if(auto_drive(0.7, 23)){
                     reset_drive_encoders();
                     stage++;
                 }
 
                 break;
+
+                //default
 
             case 2:
 
@@ -100,7 +103,7 @@ public class TestCrater extends Base {
 
             case 4:
 
-                if(auto_drive(0.8, 48)){
+                if(auto_drive(0.8, 40)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -109,16 +112,18 @@ public class TestCrater extends Base {
 
             case 5:
 
-                if(auto_turn(-0.4, 45)){ //left
+                if(auto_turn(-0.4, 70)){ //left
                     reset_drive_encoders();
-                    stage+=7;//to end
+                    stage++;//to end
                 }
 
                 break;
 
+            //end
+
             case 6:
 
-                if(auto_drive(0.6, 50)){
+                if(auto_drive(0.6, 40)){
                     reset_drive_encoders();
                     stage++;
                 }

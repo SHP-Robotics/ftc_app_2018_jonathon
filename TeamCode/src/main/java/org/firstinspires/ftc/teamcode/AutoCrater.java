@@ -1,4 +1,4 @@
-//no CV, but works without sampling
+//needs testing
 
 package org.firstinspires.ftc.teamcode;
 
@@ -6,6 +6,7 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Autonomous
 public class AutoCrater extends Base {
@@ -60,32 +61,30 @@ public class AutoCrater extends Base {
             case 0:
 
                 if(Math.abs(get_climb_enc())> 4250){
-
+                    detector.enable();
                     climb(0);
                     timer.reset();
                     stage ++;
-
                 }else{
                     climb(1);
                 }
 
                 break;
-                //drive sequence setup
 
             case 1:
 
-                if(auto_drive(0.7, 23)){
-                    reset_drive_encoders();
+                if(timer.seconds() < 3){
+                    stop_all();
+                }
+                else{
                     stage++;
                 }
 
                 break;
 
-                //default
-
             case 2:
 
-                if(auto_drive(-0.4, 5)){ //back
+                if(auto_drive(0.2, 1)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -94,17 +93,31 @@ public class AutoCrater extends Base {
 
             case 3:
 
-                if(auto_turn(-0.4, 90)){ //left
-                    reset_drive_encoders();
+                if(detector.getAligned()){
+                    stage +=4;
+                }
+                else{
                     stage++;
                 }
 
                 break;
 
+                //turning
+
             case 4:
 
-                if(auto_drive(0.8, 40)){
-                    reset_drive_encoders();
+                if(detector.getXPosition() > 280){
+
+                    direction = 1;
+
+                    if(detector.getAligned()){
+                        stage+=2;
+                    }
+                    else if(auto_turn(0.4, 5)){ //right
+                        reset_drive_encoders();
+                    }
+                }
+                else{
                     stage++;
                 }
 
@@ -112,18 +125,28 @@ public class AutoCrater extends Base {
 
             case 5:
 
-                if(auto_turn(-0.4, 70)){ //left
-                    reset_drive_encoders();
-                    stage++;//to end
+                if(detector.getXPosition() < 280) {
+
+                    direction = 2;
+
+                    if(detector.getAligned()){
+                        stage+=2;
+                    }
+                    else if (auto_turn(-0.4, -5)) { //left
+                        reset_drive_encoders();
+                    }
+                }
+                else{
+                    stage++;
                 }
 
                 break;
 
-            //end
+                //drive sequence setup
 
             case 6:
 
-                if(auto_drive(0.6, 40)){
+                if(auto_turn(0.4, 10)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -132,6 +155,141 @@ public class AutoCrater extends Base {
 
             case 7:
 
+                if(auto_drive(0.7, 23)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+                //check direction
+
+            case 8:
+
+                if(direction == 0){
+                    stage++;
+                }
+                else if(direction == 1){
+                    stage +=5;
+                }
+                else if(direction == 2){
+                    stage += 8;
+                }
+                else{
+                    stage++;
+                }
+
+                break;
+
+                //default - change units
+
+            case 9:
+
+                if(auto_drive(-0.7, 23)){ //back
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 10:
+
+                if(auto_turn(-0.4, 90)){ //left
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 11:
+
+                if(auto_drive(0.8, 48)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 12:
+
+                if(auto_turn(-0.4, 45)){ //left
+                    reset_drive_encoders();
+                    stage+=7;//to end
+                }
+
+                break;
+
+            //right - 120 - 35d - 70
+
+            case 13:
+
+                if(auto_turn(-0.4, 120)){ //left - change
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 14:
+
+                if(auto_drive(0.8, 35)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 15:
+
+                if(auto_turn(-0.4, 70)){ //left
+                    reset_drive_encoders();
+                    stage+=4; //to end
+                }
+
+                break;
+
+            //left - 20d - 20 - 90d
+
+            case 16:
+
+                if(auto_turn(-0.4, 20)){ //left
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 17:
+
+                if(auto_drive(0.8, 20)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 18:
+
+                if(auto_turn(-0.4, 90)){ //left
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            //end
+
+            case 19:
+
+                if(auto_drive(0.6, 50)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
+            case 20:
+
                 if(auto_turn(0.4, 90)){
                     reset_drive_encoders();
                     stage++;
@@ -139,7 +297,7 @@ public class AutoCrater extends Base {
 
                 break;
 
-            case 8:
+            case 21:
 
                 marker_servo.setPosition(drop_position);
                 stage++;

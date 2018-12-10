@@ -1,4 +1,4 @@
-//don't change - works
+//final test
 
 package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.CameraViewDisplay;
@@ -98,7 +98,7 @@ public class BackupDepot extends Base {
                 if(detector.getXPosition() < 280) {
                     direction = 2;
                     if(detector.getAligned()){
-                        stage+=2;
+                        stage++;
                     }
 
                     else if (auto_turn(-0.4, -5)) { //left
