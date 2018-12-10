@@ -209,26 +209,38 @@ public class AutoDepot extends Base {
                 stage++;
                 break;
 
+
             case 18:
-                if(auto_drive(0.8, 10)){
+                if(auto_turn(-0.4, 180)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
 
             case 19:
-                if(auto_turn(0.4, 90)){
+                if(auto_drive(0.7, 10)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
 
             case 20:
-                if(auto_drive(1, 85)){
+
+                if(auto_turn(-0.4, 45)){
                     reset_drive_encoders();
                     stage++;
                 }
                 break;
+
+            case 21:
+
+                if(auto_drive(0.7, 85)){
+                    reset_drive_encoders();
+                    stage++;
+                }
+
+                break;
+
             default:
                 break;
         }
