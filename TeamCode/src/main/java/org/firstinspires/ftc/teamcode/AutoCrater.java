@@ -1,4 +1,4 @@
-//pre-test Auto Crater
+//no CV, but works without sampling
 
 package org.firstinspires.ftc.teamcode;
 
