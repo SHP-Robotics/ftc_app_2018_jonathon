@@ -6,11 +6,9 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-@Disabled
 @Autonomous
-public class BackupCrater extends Base {
+public class Crater extends Base {
     private int stage = 0;
     private GoldAlignDetector detector;
 
@@ -61,6 +59,13 @@ public class BackupCrater extends Base {
 
             case 0:
 
+                left_claw.setPosition(left_grab);
+                right_claw.setPosition(right_grab);
+                stage++;
+                break;
+
+            case 1:
+
                 if(Math.abs(get_climb_enc())> 4250){
 
                     climb(0);
@@ -72,22 +77,11 @@ public class BackupCrater extends Base {
                 }
 
                 break;
-                //drive sequence setup
-
-            case 1:
-
-                if(auto_drive(0.7, 23)){
-                    reset_drive_encoders();
-                    stage++;
-                }
-
-                break;
-
-                //default
+            //drive sequence setup
 
             case 2:
 
-                if(auto_drive(-0.4, 5)){ //back
+                if(auto_drive(0.4, 5)){
                     reset_drive_encoders();
                     stage++;
                 }
@@ -96,55 +90,23 @@ public class BackupCrater extends Base {
 
             case 3:
 
-                if(auto_turn(-0.4, 90)){ //left
-                    reset_drive_encoders();
+                if(Math.abs(get_climb_enc())< 2000){
+                    climb(0);
+                    timer.reset();
                     stage++;
+                }else{
+                    climb(-1);
                 }
 
                 break;
 
             case 4:
 
-                if(auto_drive(0.8, 40)){
+                if(auto_drive(0.4, 60)){ //forward
                     reset_drive_encoders();
                     stage++;
                 }
 
-                break;
-
-            case 5:
-
-                if(auto_turn(-0.4, 70)){ //left
-                    reset_drive_encoders();
-                    stage++;//to end
-                }
-
-                break;
-
-            //end
-
-            case 6:
-
-                if(auto_drive(0.6, 40)){
-                    reset_drive_encoders();
-                    stage++;
-                }
-
-                break;
-
-            case 7:
-
-                if(auto_turn(0.4, 90)){
-                    reset_drive_encoders();
-                    stage++;
-                }
-
-                break;
-
-            case 8:
-
-                marker_servo.setPosition(drop_position);
-                stage++;
                 break;
 
             default:

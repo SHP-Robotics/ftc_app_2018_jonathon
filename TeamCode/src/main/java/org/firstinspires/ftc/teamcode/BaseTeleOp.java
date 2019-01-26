@@ -25,6 +25,12 @@ public class BaseTeleOp extends Base {
     public void loop(){
         super.loop();
 
+        if(gamepad1.x){
+            marker_servo.setPosition(drop_position);
+        }else if(gamepad1.y){
+            marker_servo.setPosition(up_position);
+        }
+
         //climber
 
         if(gamepad1.dpad_up) {
@@ -33,6 +39,20 @@ public class BaseTeleOp extends Base {
             climb(-0.5);
         } else {
             climb(0);
+        }
+
+        if(gamepad1.left_bumper){
+            extend(0.5);
+        } else if(gamepad1.right_bumper){
+            extend(-0.5);
+        }else{
+            extend(0);
+        }
+
+        if(gamepad1.b){
+            grab();
+        }else if(gamepad1.a){
+            ungrab();
         }
 
         //drive train
@@ -44,48 +64,6 @@ public class BaseTeleOp extends Base {
         rightBack.setPower(right);
         leftFront.setPower(left);
         rightFront.setPower(right);
-
-
-
-        //tank drive sensitivity
-/*
-        if (gamepad1.left_stick_y > 0 && gamepad1.left_stick_y < 0.5) {
-
-            leftBack.setPower(0.3);
-            leftFront.setPower(0.3);
-
-        }
-        else if (gamepad1.left_stick_y > 0.5 && gamepad1.left_stick_y < 0.9) {
-
-            leftBack.setPower(0.5);
-            leftFront.setPower(0.5);
-
-        }
-        else if (gamepad1.left_stick_y > 0.9) {
-
-            leftBack.setPower(0.6);
-            leftFront.setPower(0.6);
-
-        }
-        else if (gamepad1.right_stick_y > 0 && gamepad1.right_stick_y < 0.5) {
-
-            rightBack.setPower(-0.3);
-            rightFront.setPower(-0.3);
-
-        }
-        else if (gamepad1.right_stick_y > 0.5 && gamepad1.right_stick_y < 0.9) {
-
-            rightBack.setPower(-0.5);
-            rightFront.setPower(-0.5);
-
-        }
-        else if (gamepad1.right_stick_y > 0.9) {
-
-            rightBack.setPower(-0.6);
-            rightFront.setPower(-0.6);
-
-        }
-*/
 
         if (gamepad1.right_trigger > 0.7 && gamepad1.right_trigger < 0.9) {
 

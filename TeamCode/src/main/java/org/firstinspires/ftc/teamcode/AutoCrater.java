@@ -8,6 +8,7 @@ import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+@Disabled
 @Autonomous
 public class AutoCrater extends Base {
     private int stage = 0;
@@ -40,6 +41,9 @@ public class AutoCrater extends Base {
         detector.ratioScorer.perfectRatio = 1.0;
 
         marker_servo.setPosition(up_position);
+
+        left_claw.setPosition(left_grab);
+        right_claw.setPosition(right_grab);
 
         //detector.enable();
     }

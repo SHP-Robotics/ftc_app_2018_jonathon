@@ -5,6 +5,8 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 @Autonomous
 public class AutoDepot extends Base {
     private int stage = 0;
@@ -30,6 +32,10 @@ public class AutoDepot extends Base {
         detector.ratioScorer.weight = 5;
         detector.ratioScorer.perfectRatio = 1.0;
         marker_servo.setPosition(up_position);
+
+        left_claw.setPosition(left_grab);
+        right_claw.setPosition(right_grab);
+
         detector.enable();
     }
 

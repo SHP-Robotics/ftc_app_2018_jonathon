@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 
 public class Base extends OpMode {
 
-    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climbMotor;
-    public Servo marker_servo;
+    public DcMotor leftBack, rightBack, leftFront, rightFront, intakeMove, climbMotor, pinion_motor;
+    public Servo marker_servo, left_claw, right_claw;
     public ElapsedTime timer = new ElapsedTime();
 
     double left = 0;
@@ -26,7 +26,13 @@ public class Base extends OpMode {
     public double fastSpeed = 1.0;
 
     public double drop_position = 1.0;
-    public double up_position = 0.15;
+    public double up_position = 0.25;
+
+    public double left_init = 1.0;
+    public double right_init = 0;
+
+    public double left_grab = 0.3;
+    public double right_grab = 0.7;
 
     @Override
 
@@ -40,11 +46,19 @@ public class Base extends OpMode {
 
         intakeMove = hardwareMap.get(DcMotor.class, "intakeMove");
 
+        pinion_motor = hardwareMap.get(DcMotor.class, "pinion_motor");
+
         climbMotor = hardwareMap.get(DcMotor.class, "climbMotor");
 
         marker_servo = hardwareMap.get(Servo.class, "marker_servo");
+        left_claw = hardwareMap.get(Servo.class, "left_claw");
+        right_claw = hardwareMap.get(Servo.class, "right_claw");
 
         marker_servo.setPosition(up_position);
+
+        left_claw.setPosition(left_init);
+        right_claw.setPosition(right_init);
+
     }
 
     @Override
@@ -71,6 +85,7 @@ public class Base extends OpMode {
         telemetry.addData("leftFront encoder: ", get_leftFront_motor_enc());
         telemetry.addData("rightFront encoder: ", get_rightFront_motor_enc());
         telemetry.addData("climber encoder: ", get_climb_enc());
+        telemetry.addData("extend encoder: ", get_extend_enc());
     }
 
     //reset encoders
@@ -102,12 +117,49 @@ public class Base extends OpMode {
 
     }
 
+    //extending rack and pinion arm
+
+
+
+
+    public int get_extend_enc(){
+        if(pinion_motor.getMode() != DcMotor.RunMode.RUN_USING_ENCODER){
+            pinion_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return pinion_motor.getCurrentPosition();
+    }
+
+    public void extend(double power){
+
+        double speed = Range.clip(power, -1, 1);
+        pinion_motor.setPower(-speed);
+    }
+
+
+
+    //
+
     public void intake(double power) {
 
         double speed = Range.clip(power, -1, 1);
         intakeMove.setPower(-speed);
 
     }
+
+    public void grab(){
+
+        left_claw.setPosition(left_grab);
+        right_claw.setPosition(right_grab);
+
+    }
+
+    public void ungrab(){
+
+        left_claw.setPosition(left_init);
+        right_claw.setPosition(right_init);
+
+    }
+
 
     //intake
 
