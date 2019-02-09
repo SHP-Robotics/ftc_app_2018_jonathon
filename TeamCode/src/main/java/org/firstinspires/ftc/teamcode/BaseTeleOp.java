@@ -68,32 +68,37 @@ public class BaseTeleOp extends Base {
         if (gamepad1.right_trigger > 0.7 && gamepad1.right_trigger < 0.9) {
 
             intakeMove.setPower(0.8);
+            marker_servo.setPosition(drop_position);
 
         }
         else if (gamepad1.left_trigger > 0.7 && gamepad1.left_trigger < 0.9) {
 
             intakeMove.setPower(-0.8);
+            marker_servo.setPosition(up_position);
 
         }
         else if(gamepad1.right_trigger > 0.3 && gamepad1.right_trigger < 0.7){
 
             intakeMove.setPower(0.4);
+            marker_servo.setPosition(drop_position);
 
         }
         else if(gamepad1.left_trigger > 0.3 && gamepad1.left_trigger < 0.7){
 
             intakeMove.setPower(-0.4);
+            marker_servo.setPosition(up_position);
 
         }
         else if(gamepad1.right_trigger > 0.1 && gamepad1.right_trigger < 0.3){
 
             intakeMove.setPower(0.2);
+            marker_servo.setPosition(drop_position);
 
         }
         else if(gamepad1.left_trigger > 0.1 && gamepad1.left_trigger < 0.3){
 
             intakeMove.setPower(-0.2);
-
+            marker_servo.setPosition(up_position);
         }
         else {
             intakeMove.setPower(0);
